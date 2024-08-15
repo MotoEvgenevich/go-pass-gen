@@ -45,7 +45,6 @@ func randomPassGenerator(passLen int, digitsParam bool, uppercaseLetterParam boo
 }
 
 func lowerCaseGenerate() string {
-	rand.Seed(uint64(time.Now().UnixNano()))
 	min := 97
 	max := 122
 	randomNum := rand.Intn(max-min+1) + min
@@ -53,7 +52,6 @@ func lowerCaseGenerate() string {
 }
 
 func digitsGenerate() string {
-	rand.Seed(uint64(time.Now().UnixNano()))
 	min := 48
 	max := 57
 	randomNum := rand.Intn(max-min+1) + min
@@ -61,7 +59,6 @@ func digitsGenerate() string {
 }
 
 func uppercaseLetterGenerate() string {
-	rand.Seed(uint64(time.Now().UnixNano()))
 	min := 65
 	max := 90
 	randomNum := rand.Intn(max-min+1) + min
@@ -75,9 +72,6 @@ func specSymbolGenerate() string {
 		{91, 96},
 		{123, 126},
 	}
-
-	// Инициализируем генератор случайных чисел
-	rand.Seed(uint64(time.Now().UnixNano()))
 
 	// Выбираем случайный диапазон
 	rangeIndex := rand.Intn(len(specialRanges))
