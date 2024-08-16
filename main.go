@@ -31,11 +31,11 @@ func randomPassGenerator(passLen int, digitsParam bool, uppercaseLetterParam boo
 		randomNum := rand.Intn(max-min+1) + min
 		switch {
 		case randomNum < 4:
-			result += lowerCaseGenerate()
+			result += getRandomCharBetween(97, 122) // lowerCaseGenerate
 		case randomNum > 3 && randomNum < 7 && digitsParam:
-			result += digitsGenerate()
+			result += getRandomCharBetween(48, 57) // digitsGenerate
 		case randomNum > 6 && randomNum < 10 && uppercaseLetterParam:
-			result += uppercaseLetterGenerate()
+			result += getRandomCharBetween(65, 90) // uppercaseLetterGenerate
 		case randomNum > 9 && specSymbolParam:
 			result += specSymbolGenerate()
 		}
@@ -44,23 +44,7 @@ func randomPassGenerator(passLen int, digitsParam bool, uppercaseLetterParam boo
 	return result
 }
 
-func lowerCaseGenerate() string {
-	min := 97
-	max := 122
-	randomNum := rand.Intn(max-min+1) + min
-	return string(byte(randomNum))
-}
-
-func digitsGenerate() string {
-	min := 48
-	max := 57
-	randomNum := rand.Intn(max-min+1) + min
-	return string(byte(randomNum))
-}
-
-func uppercaseLetterGenerate() string {
-	min := 65
-	max := 90
+func getRandomCharBetween(min int, max int) string {
 	randomNum := rand.Intn(max-min+1) + min
 	return string(byte(randomNum))
 }
