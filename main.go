@@ -21,61 +21,34 @@ func main() {
 
 func randomPassGenerator(passLen int, digitsParam bool, uppercaseLetterParam bool, specSymbolParam bool) string {
 
-	result := ""
-
+	var result []byte
+	rand.Seed(uint64(time.Now().UnixNano()))
 	for len(result) <= passLen {
-		rand.Seed(uint64(time.Now().UnixNano()))
 		time.Sleep(time.Millisecond * 10)
-		min := 1
-		max := 12
-		randomNum := rand.Intn(max-min+1) + min
+		randomNum := rand.Intn(12) + 1
 		switch {
 		case randomNum < 4:
-			result += lowerCaseGenerate()
+			result = append(result, randomChar(97, 122))
 		case randomNum > 3 && randomNum < 7 && digitsParam:
-			result += digitsGenerate()
+			result = append(result, randomChar(97, 122))
 		case randomNum > 6 && randomNum < 10 && uppercaseLetterParam:
-			result += uppercaseLetterGenerate()
+			result = append(result, randomChar(65, 90))
 		case randomNum > 9 && specSymbolParam:
-			result += specSymbolGenerate()
+			result = append(result, generateSpecialSymbol())
 		}
 	}
-	fmt.Println(result)
-	return result
+	fmt.Println(string(result))
+	return string(result)
 }
 
-func lowerCaseGenerate() string {
-	min := 97
-	max := 122
-	randomNum := rand.Intn(max-min+1) + min
-	return string(byte(randomNum))
+func randomChar(min, max int) byte {
+	return byte(rand.Intn(max-min+1) + min)
 }
 
-func digitsGenerate() string {
-	min := 48
-	max := 57
-	randomNum := rand.Intn(max-min+1) + min
-	return string(byte(randomNum))
-}
-
-func uppercaseLetterGenerate() string {
-	min := 65
-	max := 90
-	randomNum := rand.Intn(max-min+1) + min
-	return string(byte(randomNum))
-}
-
-func specSymbolGenerate() string {
+func generateSpecialSymbol() byte {
 	specialRanges := [][]int{
-		{33, 47},
-		{58, 64},
-		{91, 96},
-		{123, 126},
+		{33, 47}, {58, 64}, {91, 96}, {123, 126},
 	}
-
-	// Выбираем случайный диапазон
-	rangeIndex := rand.Intn(len(specialRanges))
-	selectedRange := specialRanges[rangeIndex]
-	randomChar := rand.Intn(selectedRange[1]-selectedRange[0]+1) + selectedRange[0]
-	return string(byte(randomChar))
+	selectedRange := specialRanges[rand.Intn(len(specialRanges))]
+	return randomChar(selectedRange[0], selectedRange[1])
 }
