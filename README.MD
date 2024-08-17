@@ -1,3 +1,19 @@
+# Random Password Generator
+
+## Description:
+
+A simple CLI tool that generates random passwords with specified parameters, such as length, the inclusion of special characters, numbers, etc.
+
+## Key Features:
+
+	•	Generation of a password with a specified length.
+	•	Option to include/exclude numbers, uppercase letters, and special characters.
+	•	Saving the generated password to a file.
+
+## Usage Example:
+
+go run password_gen.go --length=12 --special-chars=true
+
 # Генератор случайных паролей
 ## Описание:
 
@@ -5,9 +21,9 @@
 
 ## Основные функции:
 
-Генерация пароля заданной длины.
-Возможность включения/исключения цифр, заглавных букв и специальных символов.
-Сохранение сгенерированного пароля в файл.
+    • Генерация пароля заданной длины.
+    • Возможность включения/исключения цифр, заглавных букв и специальных символов.
+    • Сохранение сгенерированного пароля в файл.
 ## Пример использования:
 ```
 go run password_gen.go --length=12 --special-chars=true
