@@ -12,7 +12,7 @@ A simple CLI tool that generates random passwords with specified parameters, suc
 
 ## Usage Example:
 
-go run password_gen.go --length=12 --special-chars=true
+go run main.go -len=10 -digit=false -upletter=false -spec=false -save=false   
 
 # Генератор случайных паролей
 ## Описание:
@@ -26,6 +26,6 @@ go run password_gen.go --length=12 --special-chars=true
     • Сохранение сгенерированного пароля в файл.
 ## Пример использования:
 ```
-go run password_gen.go --length=12 --special-chars=true
+go run main.go -len=10 -digit=false -upletter=false -spec=false -save=false   
 
 ```
