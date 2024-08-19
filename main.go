@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"time"
 
@@ -8,11 +9,13 @@ import (
 )
 
 func main() {
-	leight := 10
-	digitsParam := true
-	uppercaseLetterParam := true
-	specSymbolParam := true
-	randomPassGenerator(leight, digitsParam, uppercaseLetterParam, specSymbolParam)
+	leight := flag.Int("len", 8, "leight of password")
+	digitsParam := flag.Bool("digit", true, "digits in password")
+	uppercaseLetterParam := flag.Bool("upletter", true, "uppercase letter in password")
+	specSymbolParam := flag.Bool("spec", true, "spec symbol in password")
+	flag.Parse()
+	randomPassGenerator(*leight, *digitsParam, *uppercaseLetterParam, *specSymbolParam)
+
 }
 
 // 97-122 lowercase eng letters
