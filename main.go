@@ -100,3 +100,12 @@ func specSymbolGenerate() string {
 	randomChar := rand.Intn(selectedRange[1]-selectedRange[0]+1) + selectedRange[0]
 	return string(byte(randomChar))
 }
+
+/*
+все эти функции можно в принципе выделить в одну куда параметром передавать min и max или даже rangesm как в случае спецсимволов
+*/
+
+func universallGenerate() string {
+	result := ""
+	return result
+}
