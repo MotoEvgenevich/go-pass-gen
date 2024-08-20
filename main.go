@@ -49,15 +49,15 @@ func randomPassGenerator(passLen int, digitsParam bool, uppercaseLetterParam boo
 	rand.Seed(uint64(time.Now().UnixNano()))
 
 	for len(result) < passLen {
-		randomNum := rand.Intn(12) + 1
+		randomNum := rand.Intn(4) + 1
 		switch {
-		case randomNum < 4:
+		case randomNum == 1:
 			result += universalGenerate(97, 122) // lowercase letters
-		case randomNum > 3 && randomNum < 7 && digitsParam:
+		case randomNum == 2 && digitsParam:
 			result += universalGenerate(48, 57) // digits
-		case randomNum > 6 && randomNum < 10 && uppercaseLetterParam:
+		case randomNum == 3 && uppercaseLetterParam:
 			result += universalGenerate(65, 90) // uppercase letters
-		case randomNum > 9 && specSymbolParam:
+		case randomNum == 4 && specSymbolParam:
 			result += universalGenerateRanges([][]int{
 				{33, 47},
 				{58, 64},
