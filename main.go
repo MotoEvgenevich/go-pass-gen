@@ -59,7 +59,7 @@ func randomPassGenerator(passLen int, digitsParam bool, uppercaseLetterParam boo
 				{58, 64},
 				{91, 96},
 				{123, 126},
-			}) // special symbols
+			})
 		}
 	}
 	return result
