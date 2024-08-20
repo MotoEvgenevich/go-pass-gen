@@ -12,18 +12,19 @@ import (
 
 func main() {
 
-	leight := flag.Int("len", 8, "leight of password")
+	length := flag.Int("len", 8, "leight of password")
 	digitsParam := flag.Bool("digit", true, "digits in password")
 	uppercaseLetterParam := flag.Bool("upletter", true, "uppercase letter in password")
 	specSymbolParam := flag.Bool("spec", true, "spec symbol in password")
 	save := flag.Bool("save", true, "Save to file $FILENAME")
+	filename := flag.String("filename", "password.txt", "Filename to save the password")
 
 	flag.Parse()
 
-	pass := randomPassGenerator(*leight, *digitsParam, *uppercaseLetterParam, *specSymbolParam)
+	pass := randomPassGenerator(*length, *digitsParam, *uppercaseLetterParam, *specSymbolParam)
 
 	if *save {
-		file, err := os.OpenFile("password.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+		file, err := os.OpenFile(*filename, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -32,7 +33,10 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println("file with pass create success. Pass is:", pass)
+		fmt.Println("Password saved to file:", *filename)
+		fmt.Println("Generated password:", pass)
+	} else {
+		fmt.Println("Generated password:", pass)
 	}
 }
 
