@@ -41,71 +41,37 @@ func main() {
 // 48-57 diggits
 
 func randomPassGenerator(passLen int, digitsParam bool, uppercaseLetterParam bool, specSymbolParam bool) string {
+	var result string
+	rand.Seed(uint64(time.Now().UnixNano()))
 
-	result := ""
-
-	for len(result) <= passLen {
-		rand.Seed(uint64(time.Now().UnixNano()))
-		time.Sleep(time.Millisecond * 10)
-		min := 1
-		max := 12
-		randomNum := rand.Intn(max-min+1) + min
+	for len(result) < passLen {
+		randomNum := rand.Intn(12) + 1
 		switch {
 		case randomNum < 4:
-			result += lowerCaseGenerate()
+			result += universalGenerate(97, 122) // lowercase letters
 		case randomNum > 3 && randomNum < 7 && digitsParam:
-			result += digitsGenerate()
+			result += universalGenerate(48, 57) // digits
 		case randomNum > 6 && randomNum < 10 && uppercaseLetterParam:
-			result += uppercaseLetterGenerate()
+			result += universalGenerate(65, 90) // uppercase letters
 		case randomNum > 9 && specSymbolParam:
-			result += specSymbolGenerate()
+			result += universalGenerateRanges([][]int{
+				{33, 47},
+				{58, 64},
+				{91, 96},
+				{123, 126},
+			}) // special symbols
 		}
 	}
-	fmt.Println(result)
 	return result
 }
 
-func lowerCaseGenerate() string {
-	min := 97
-	max := 122
+func universalGenerate(min int, max int) string {
 	randomNum := rand.Intn(max-min+1) + min
 	return string(byte(randomNum))
 }
 
-func digitsGenerate() string {
-	min := 48
-	max := 57
-	randomNum := rand.Intn(max-min+1) + min
-	return string(byte(randomNum))
-}
-
-func uppercaseLetterGenerate() string {
-	min := 65
-	max := 90
-	randomNum := rand.Intn(max-min+1) + min
-	return string(byte(randomNum))
-}
-
-func specSymbolGenerate() string {
-	specialRanges := [][]int{
-		{33, 47},
-		{58, 64},
-		{91, 96},
-		{123, 126},
-	}
-
-	// Выбираем случайный диапазон
-	rangeIndex := rand.Intn(len(specialRanges))
-	selectedRange := specialRanges[rangeIndex]
-	randomChar := rand.Intn(selectedRange[1]-selectedRange[0]+1) + selectedRange[0]
-	return string(byte(randomChar))
-}
-
-/*
-все эти функции можно в принципе выделить в одну куда параметром передавать min и max или даже rangesm как в случае спецсимволов
-*/
-
-func universallGenerate() string {
-	result := ""
-	return result
+func universalGenerateRanges(ranges [][]int) string {
+	rangeIndex := rand.Intn(len(ranges))
+	selectedRange := ranges[rangeIndex]
+	return universalGenerate(selectedRange[0], selectedRange[1])
 }
