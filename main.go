@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	length := flag.Int("len", 8, "leight of password")
+	length := flag.Int("len", 8, "length of password")
 	digitsParam := flag.Bool("digit", true, "digits in password")
 	uppercaseLetterParam := flag.Bool("upletter", true, "uppercase letter in password")
 	specSymbolParam := flag.Bool("spec", true, "spec symbol in password")
