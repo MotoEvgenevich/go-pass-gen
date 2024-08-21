@@ -21,11 +21,12 @@ A simple CLI tool that generates random passwords with specified parameters, suc
 
 ### flags Description:
 
-- len=10 - leight of generating password
-- digit=false - add digits to password (true is default)
-- upletter=false - add uppercase letters to password(true is default)
-- spec=false - add spec Symbols to password(true is default)
-- save=true - save password to paswords.txt new string(true is default) 
+- `len=10` - length of generating password
+- `digit=false` - add digits to password (true is default)
+- `upletter=false` - add uppercase letters to password(true is default)
+- `spec=false` - add spec Symbols to password(true is default)
+- `save=true` - save password to paswords.txt new string(true is default) 
+- `filename="my_password.txt"` - save password to filename
 
 ## Usage Example:
 
@@ -58,6 +59,7 @@ go run main.go -len=10 -digit=false -upletter=false -spec=false -save=false
 - `upletter=false` - добавить заглавные буквы в пароль (по умолчанию `true`)
 - `spec=false` - добавить специальные символы в пароль (по умолчанию `true`)
 - `save=true` - сохранить пароль в файл `passwords.txt` с новой строки (по умолчанию `true`)
+- `filename="my_password.txt"` - сохранить пароль в указанный файл
 
 
 ## Пример использования:

@@ -12,18 +12,19 @@ import (
 
 func main() {
 
-	leight := flag.Int("len", 8, "leight of password")
+	length := flag.Int("len", 8, "length of password")
 	digitsParam := flag.Bool("digit", true, "digits in password")
 	uppercaseLetterParam := flag.Bool("upletter", true, "uppercase letter in password")
 	specSymbolParam := flag.Bool("spec", true, "spec symbol in password")
 	save := flag.Bool("save", true, "Save to file $FILENAME")
+	filename := flag.String("filename", "password.txt", "Filename to save the password")
 
 	flag.Parse()
 
-	pass := randomPassGenerator(*leight, *digitsParam, *uppercaseLetterParam, *specSymbolParam)
+	pass := randomPassGenerator(*length, *digitsParam, *uppercaseLetterParam, *specSymbolParam)
 
 	if *save {
-		file, err := os.OpenFile("password.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+		file, err := os.OpenFile(*filename, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -32,7 +33,10 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println("file with pass create success. Pass is:", pass)
+		fmt.Println("Password saved to file:", *filename)
+		fmt.Println("Generated password:", pass)
+	} else {
+		fmt.Println("Generated password:", pass)
 	}
 }
 
@@ -45,15 +49,15 @@ func randomPassGenerator(passLen int, digitsParam bool, uppercaseLetterParam boo
 	rand.Seed(uint64(time.Now().UnixNano()))
 
 	for len(result) < passLen {
-		randomNum := rand.Intn(12) + 1
+		randomNum := rand.Intn(4) + 1
 		switch {
-		case randomNum < 4:
+		case randomNum == 1:
 			result += universalGenerate(97, 122) // lowercase letters
-		case randomNum > 3 && randomNum < 7 && digitsParam:
+		case randomNum == 2 && digitsParam:
 			result += universalGenerate(48, 57) // digits
-		case randomNum > 6 && randomNum < 10 && uppercaseLetterParam:
+		case randomNum == 3 && uppercaseLetterParam:
 			result += universalGenerate(65, 90) // uppercase letters
-		case randomNum > 9 && specSymbolParam:
+		case randomNum == 4 && specSymbolParam:
 			result += universalGenerateRanges([][]int{
 				{33, 47},
 				{58, 64},
